@@ -5,6 +5,7 @@ import cn.kiiwii.framework.model.User;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by zhong on 2016/9/19.
@@ -30,5 +31,15 @@ public interface IRedisDAO {
 
     void setSet(String name, User user);
 
-    void setZSet(String name, List<User> users);
+    void setZSet(String key,int id,double score);
+
+    void addScore(String key,int id,double score);
+
+    void updateScore(String key,int id,double score);
+
+    public Set getTop(String key, int top);
+
+    Set getTopWithScore(String key, int i);
+
+    Set getTopWithScore(String key,int start, int limit);
 }

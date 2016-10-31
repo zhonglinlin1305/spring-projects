@@ -1,14 +1,16 @@
 package cn.kiiwii.framework.service;
 
+import java.util.Set;
+
 /**
  * Created by zhong on 2016/9/19.
  */
 public interface ITestService {
-    void set();
+    void addCore(int id, int score);
 
-    void setObject();
+    Set getTop(int top);
 
-    void setList();
+    Set getTopWithScore(int top);
 
-    void setHash();
+    public Set getTopWithScore(int start,int limit);
 }

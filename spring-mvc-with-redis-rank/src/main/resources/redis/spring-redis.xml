@@ -7,7 +7,9 @@
 	    ">
 
     <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig"
-          p:maxIdle="${redis.maxIdle}" p:maxWaitMillis="${redis.maxWaitMillis}" p:testOnBorrow="${redis.testOnBorrow}">
+          p:maxIdle="${redis.maxIdle}"
+          p:minIdle="${redis.minIdle}"
+          p:maxWaitMillis="${redis.maxWaitMillis}" p:testOnBorrow="${redis.testOnBorrow}">
     </bean>
 
     <bean id="jdkSerializationRedisSerializer"

@@ -3,14 +3,12 @@ package cn.kiiwii.framework.dao.impl;
 import cn.kiiwii.framework.dao.IRedisDAO;
 import cn.kiiwii.framework.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.HashOperations;
-import org.springframework.data.redis.core.ListOperations;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.data.redis.core.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by zhong on 2016/9/19.
@@ -91,7 +89,41 @@ public class RedisDAOImpl implements IRedisDAO {
     }
 
     @Override
-    public void setZSet(String name, List<User> users) {
+    public void setZSet(String key,int id,double score) {
+        ZSetOperations zSet = redisTemplate.opsForZSet();
+        zSet.incrementScore(key,id,score);
+    }
 
+    @Override
+    public void addScore(String key, int id, double score) {
+        ZSetOperations zSet = redisTemplate.opsForZSet();
+        zSet.incrementScore(key,id,score);
+    }
+
+    @Override
+    public void updateScore(String key, int id, double score) {
+        ZSetOperations zSet = redisTemplate.opsForZSet();
+        zSet.add(key,id,score);
+    }
+
+    @Override
+    public Set getTop(String key,int top) {
+        ZSetOperations zSet = redisTemplate.opsForZSet();
+        Set set = zSet.reverseRange(key,0,top-1);
+        return set;
+    }
+
+    @Override
+    public Set getTopWithScore(String key,int top) {
+        ZSetOperations zSet = redisTemplate.opsForZSet();
+        Set set = zSet.reverseRangeWithScores(key,0,top-1);
+        return set;
+    }
+
+    @Override
+    public Set getTopWithScore(String key, int start, int limit) {
+        ZSetOperations zSet = redisTemplate.opsForZSet();
+        Set set = zSet.reverseRangeWithScores(key,start,start+limit-1);
+        return set;
     }
 }
