@@ -9,3 +9,6 @@
 
 #3、在maven构造的项目中引入本地jar包
 详情查看项目 [web-native-jar](web-native-jar/)
+
+#4、在spring项目中使用redis实现排行榜
+详情查看项目 [spring-mvc-with-redis-rank](spring-mvc-with-redis-rank/)
